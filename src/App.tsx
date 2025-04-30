@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import MainLayout from "./components/layout/MainLayout";
 
 // Pages pour les services
+import Services from "./pages/Services";
 import ServiceEcommerce from "./pages/services/Ecommerce";
 import ServiceProduction from "./pages/services/Production";
 import ServiceTechniciens from "./pages/services/Techniciens";
@@ -36,6 +37,7 @@ const App = () => (
             <Route index element={<Index />} />
             
             {/* Routes pour les services */}
+            <Route path="/services" element={<Services />} />
             <Route path="/services/ecommerce" element={<ServiceEcommerce />} />
             <Route path="/services/production" element={<ServiceProduction />} />
             <Route path="/services/techniciens" element={<ServiceTechniciens />} />
