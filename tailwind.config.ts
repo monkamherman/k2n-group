@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,7 +19,13 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'roboto': ['Roboto', 'sans-serif'],
+			},
 			colors: {
+				'dark-green': '#298C39',
+				'custom-orange': '#F79009',
+				'dark': '#121212',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -62,6 +69,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			backgroundColor: {
+				'bg-gradient': '#f5f5f5',
+			},
+			boxShadow: {
+				'light': '0 2px 10px rgba(0, 0, 0, 0.1)',
+				'dark-mode': '0 2px 10px rgba(255, 255, 255, 0.1)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
