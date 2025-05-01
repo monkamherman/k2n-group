@@ -3,11 +3,11 @@ import React from "react";
 import Header from "./Header";
 import { Outlet, Link } from "react-router-dom";
 import { AuthProvider } from "../../context/AuthContext";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "../../context/ThemeContext";
 
 const MainLayout = () => {
   return (
-    <ThemeProvider defaultTheme="system" enableSystem>
+    <ThemeProvider>
       <AuthProvider>
         <div className="flex flex-col min-h-screen">
           <Header />
