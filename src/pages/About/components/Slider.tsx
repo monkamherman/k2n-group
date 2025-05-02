@@ -8,7 +8,7 @@ const founders = [
     name: "Jean Dupont",
     role: "Responsable de K2N Konsultant",
     story: "Jean Dupont a commencé sa carrière dans le conseil en stratégie avant de fonder K2N Konsultant. Passionné par l'innovation, il guide les entreprises vers le succès.",
-    color: "bg-blue-100",
+    color: "bg-blue-100 dark:bg-blue-900/30",
     logo: "logo-K.svg",
     photo: "konsultan.png",
     socialLinks: {
@@ -20,7 +20,7 @@ const founders = [
     name: "Marie Curie",
     role: "Responsable de K2N Service",
     story: "Marie Curie a une expertise approfondie dans la gestion des services clients. Elle a développé des solutions sur mesure pour répondre aux besoins des clients de K2N Service.",
-    color: "bg-green-100",
+    color: "bg-green-100 dark:bg-green-900/30",
     logo: "logo-S.svg",
     photo: "service.png",
     socialLinks: {
@@ -32,7 +32,7 @@ const founders = [
     name: "Pierre Durand",
     role: "Responsable de K2N Technologie",
     story: "Pierre Durand est un pionnier dans le domaine de la technologie. Il a dirigé le développement de solutions technologiques de pointe pour K2N Technologie.",
-    color: "bg-red-100",
+    color: "bg-red-100 dark:bg-red-900/30",
     logo: "logo-T.svg",
     photo: "technologie.png",
     socialLinks: {
@@ -64,7 +64,7 @@ const textVariants = {
 
 function Slider() {
   return (
-    <div className="h-screen overflow-y-auto px-4 flex flex-col items-center justify-between">
+    <div className="h-screen overflow-y-auto px-4 flex flex-col items-center justify-between mb-20">
       {/* Header */}
       <motion.header
         className="h-4/6 flex flex-col md:w-full"
@@ -109,21 +109,31 @@ function Slider() {
                   alt={`Logo ${founder.role}`}
                   className="w-32 h-32 md:w-48 md:h-48 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20"
                 />
-                <motion.h2 className="text-3xl font-bold mb-4" variants={textVariants}>
+                <motion.h2 className="text-3xl font-bold mb-4 text-dark dark:text-white" variants={textVariants}>
                   {founder.name}
                 </motion.h2>
-                <motion.h3 className="text-xl font-semibold mb-4" variants={textVariants}>
+                <motion.h3 className="text-xl font-semibold mb-4 text-dark dark:text-white" variants={textVariants}>
                   {founder.role}
                 </motion.h3>
-                <motion.p className="text-gray-700" variants={textVariants}>
+                <motion.p className="text-gray-700 dark:text-gray-300" variants={textVariants}>
                   {founder.story}
                 </motion.p>
                 <motion.div className="mt-4 flex gap-8" variants={textVariants}>
-                  <a href={founder.socialLinks.linkedin} target="_blank" className="flex items-center gap-2 shadow-lg rounded p-2" rel="noopener noreferrer">
+                  <a 
+                    href={founder.socialLinks.linkedin} 
+                    target="_blank" 
+                    className="flex items-center gap-2 shadow-lg rounded p-2 bg-white dark:bg-dark dark:text-white hover:bg-secondary hover:text-white dark:hover:bg-primary transition-colors" 
+                    rel="noopener noreferrer"
+                  >
                     <AiOutlineLinkedin />
                     <span>Linkedin</span>
                   </a>
-                  <a href={founder.socialLinks.twitter} target="_blank" className="flex items-center gap-2 shadow-lg rounded p-2" rel="noopener noreferrer">
+                  <a 
+                    href={founder.socialLinks.twitter} 
+                    target="_blank" 
+                    className="flex items-center gap-2 shadow-lg rounded p-2 bg-white dark:bg-dark dark:text-white hover:bg-secondary hover:text-white dark:hover:bg-primary transition-colors" 
+                    rel="noopener noreferrer"
+                  >
                     <AiOutlineTwitter />
                     <span>Twitter</span>
                   </a>

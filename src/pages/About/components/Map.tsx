@@ -14,19 +14,19 @@ const Mapcart = (props: { size?: string }) => {
           </div>
           <div className="flex gap-6">
             <div
-              className="w-1 bg-dark dark:bg-white"
+              className="w-1 bg-secondary dark:bg-primary"
               style={{ height: props.size || "6rem" }}
             ></div>
             <div className="mt-1 flex flex-col gap-2">
               <h1 className="font-bold text-dark dark:text-white lg:text-4xl">Localisation</h1>
               <p className="text-dark dark:text-white lg:w-[35rem]">
-                Carrefour Meec, dans les bureeux de BUNS Cameroun
+                Carrefour Meec, dans les bureaux de BUNS Cameroun
               </p>
             </div>
           </div>
           <div className="flex gap-6">
             <div
-              className="w-1 bg-dark dark:bg-white"
+              className="w-1 bg-secondary dark:bg-primary"
               style={{ height: props.size || "8rem" }}
             ></div>
             <div className="mt-2 flex flex-col gap-2">

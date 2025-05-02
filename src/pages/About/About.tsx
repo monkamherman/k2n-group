@@ -63,9 +63,9 @@ const About = () => {
       <div>
         <Slider />
       </div>
-      {/* <div>
+      <div>
         <Mapcart />
-      </div> */}
+      </div>
     </div>
   );
 };
