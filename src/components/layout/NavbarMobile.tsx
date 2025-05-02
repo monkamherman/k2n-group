@@ -1,7 +1,10 @@
 
 import { NavLink } from "react-router-dom";
+import { useAuthStore } from "@/store/authStore";
 
 function NavbarMobile() {
+  const { user } = useAuthStore();
+  
   return (
     <nav className="flex flex-col gap-3 mb-4 text-dark dark:text-white">
       <NavLink to="/" className={({ isActive }) =>
@@ -34,6 +37,31 @@ function NavbarMobile() {
       }>
         Carrière
       </NavLink>
+      
+      {/* Conditional dashboard links based on user role */}
+      {user && user.role === 'admin' && (
+        <NavLink to="/admin/dashboard" className={({ isActive }) =>
+          isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
+        }>
+          Dashboard Admin
+        </NavLink>
+      )}
+      
+      {user && user.role === 'blogger' && (
+        <NavLink to="/blogger/dashboard" className={({ isActive }) =>
+          isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
+        }>
+          Dashboard Blogueur
+        </NavLink>
+      )}
+      
+      {user && user.role === 'technician' && (
+        <NavLink to="/technician/dashboard" className={({ isActive }) =>
+          isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
+        }>
+          Dashboard Technicien
+        </NavLink>
+      )}
     </nav>
   );
 }

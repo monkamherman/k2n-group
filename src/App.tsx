@@ -25,6 +25,13 @@ import Konsultan from "./pages/Konsultan";
 import Technologie from "./pages/Technologie";
 import Contact from "./pages/Contact";
 
+// Pages pour l'authentification
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+
+// Pages pour le dashboard admin
+import AdminDashboard from "./pages/admin/Dashboard";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,6 +60,13 @@ const App = () => (
             <Route path="/konsultan" element={<Konsultan />} />
             <Route path="/technologie" element={<Technologie />} />
             <Route path="/contact" element={<Contact />} />
+            
+            {/* Routes pour l'authentification */}
+            <Route path="/connexion" element={<Login />} />
+            <Route path="/inscription" element={<Register />} />
+            
+            {/* Routes pour le dashboard admin */}
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Route>
           
           {/* Catch-all route */}
