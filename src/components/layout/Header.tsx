@@ -7,7 +7,6 @@ import Navbar from "./Navbar";
 import { ModeToggle } from '../mode_toggle';
 import ButoonHeader from "./ButoonHeader";
 import NavbarMobile from './NavbarMobile';
-import LanguageSelector from './LanguageSwitcher';
 import { useAuthStore } from '@/store/authStore';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -34,7 +33,6 @@ function Header() {
         
         <div className="flex gap-2 items-center sm:hidden">
           <ModeToggle />
-          <LanguageSelector />
           <button 
             className="block sm:hidden text-dark dark:text-white text-[1.6rem]" 
             onClick={() => setIsOpen(!isOpen)}
@@ -44,7 +42,6 @@ function Header() {
         </div>
 
         <div className="hidden sm:flex items-center gap-4">
-          <LanguageSelector />
           <ModeToggle /> 
           <AvatarIcon />
         </div>

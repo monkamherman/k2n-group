@@ -1,69 +1,104 @@
 
-import { NavLink } from "react-router-dom";
-import { useAuthStore } from "@/store/authStore";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
-function NavbarMobile() {
-  const { user } = useAuthStore();
-  
+const NavbarMobile = () => {
   return (
-    <nav className="flex flex-col gap-3 mb-4 text-dark dark:text-white">
-      <NavLink to="/" className={({ isActive }) =>
-        isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-      }>
+    <div className="space-y-4 pb-4 z-50">
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
         Accueil
       </NavLink>
-      <NavLink to="/about" className={({ isActive }) =>
-        isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-      }>
-        A propos
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
+        À propos
       </NavLink>
-      <NavLink to="/services" className={({ isActive }) =>
-        isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-      }>
+      <NavLink
+        to="/services"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
         Services
       </NavLink>
-      <NavLink to="/formations" className={({ isActive }) =>
-        isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-      }>
-        Formations
-      </NavLink>
-      <NavLink to="/blog" className={({ isActive }) =>
-        isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-      }>
+      <NavLink
+        to="/blog"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
         Blog
       </NavLink>
-      <NavLink to="/carriere" className={({ isActive }) =>
-        isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-      }>
-        Carrière
+      <NavLink
+        to="/elearning"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
+        Formations
       </NavLink>
-      
-      {/* Conditional dashboard links based on user role */}
-      {user && user.role === 'admin' && (
-        <NavLink to="/admin/dashboard" className={({ isActive }) =>
-          isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-        }>
-          Dashboard Admin
-        </NavLink>
-      )}
-      
-      {user && user.role === 'blogger' && (
-        <NavLink to="/blogger/dashboard" className={({ isActive }) =>
-          isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-        }>
-          Dashboard Blogueur
-        </NavLink>
-      )}
-      
-      {user && user.role === 'technician' && (
-        <NavLink to="/technician/dashboard" className={({ isActive }) =>
-          isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange" : "text-dark dark:text-white"
-        }>
-          Dashboard Technicien
-        </NavLink>
-      )}
-    </nav>
+      <NavLink
+        to="/carrieres"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
+        Carrières
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          cn(
+            "flex px-2 py-2.5 rounded-md transition-colors",
+            isActive
+              ? "bg-dark-green/10 text-dark-green dark:bg-green-900/30 dark:text-green-400"
+              : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          )
+        }
+      >
+        Contact
+      </NavLink>
+    </div>
   );
-}
+};
 
 export default NavbarMobile;

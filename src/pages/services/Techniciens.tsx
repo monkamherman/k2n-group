@@ -1,106 +1,179 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
+import QuoteSystem from "@/components/services/QuoteSystem";
+import { Users, Award, Calendar, BookOpen } from "lucide-react";
 
 const ServiceTechniciens = () => {
+  const [showQuoteForm, setShowQuoteForm] = React.useState(false);
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-16 px-4 bg-blue-50">
+      <section className="py-16 px-4 bg-green-50 dark:bg-green-900/20">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-            Techniciens spécialisés en pisciculture
+          <h1 className="text-4xl md:text-5xl font-bold text-dark-green dark:text-green-400 mb-6">
+            Nos techniciens spécialisés
           </h1>
-          <p className="text-xl text-blue-700 mb-8 max-w-3xl mx-auto">
-            Une équipe de professionnels à votre service pour tous vos projets aquacoles
+          <p className="text-xl text-green-700 dark:text-green-300 mb-8 max-w-3xl mx-auto">
+            Une équipe de professionnels qualifiés pour tous vos projets aquacoles
           </p>
+          <Button 
+            size="lg" 
+            variant="green" 
+            onClick={() => setShowQuoteForm(!showQuoteForm)}
+          >
+            {showQuoteForm ? "Masquer le formulaire" : "Demander un devis"}
+          </Button>
         </div>
       </section>
 
-      {/* Our Services */}
+      {/* Quote Form */}
+      {showQuoteForm && (
+        <section className="py-12 px-4">
+          <QuoteSystem serviceType="Techniciens spécialisés" />
+        </section>
+      )}
+
+      {/* Services offerts */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Nos services techniques</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-dark-green dark:text-green-400">
+            Services offerts par nos techniciens
+          </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="border rounded-lg p-6 shadow-md">
-              <h3 className="text-xl font-bold mb-3">Installation de systèmes</h3>
-              <p className="text-gray-600 mb-4">
-                Nos techniciens experts installent vos systèmes aquacoles de A à Z, en garantissant une efficacité optimale et une intégration parfaite à votre environnement.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold mb-4 text-dark-green dark:text-green-400">Installation de systèmes</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Nos techniciens sont formés pour installer tous types de systèmes aquacoles, des petites installations aux projets industriels.
               </p>
-              <Button variant="outline">Demander un devis</Button>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
+                <li>Installation de bassins</li>
+                <li>Mise en place de systèmes de filtration</li>
+                <li>Installation de systèmes d'oxygénation</li>
+                <li>Configuration des équipements de surveillance</li>
+              </ul>
             </div>
             
-            <div className="border rounded-lg p-6 shadow-md">
-              <h3 className="text-xl font-bold mb-3">Maintenance régulière</h3>
-              <p className="text-gray-600 mb-4">
-                Services d'entretien programmés pour assurer le bon fonctionnement de vos installations et prévenir les problèmes techniques.
+            <div className="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold mb-4 text-dark-green dark:text-green-400">Maintenance préventive</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Un entretien régulier pour prévenir les problèmes et assurer la longévité de vos installations.
               </p>
-              <Button variant="outline">Réserver une visite</Button>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
+                <li>Contrôle régulier des paramètres de l'eau</li>
+                <li>Nettoyage et entretien des filtres</li>
+                <li>Vérification des équipements électriques</li>
+                <li>Optimisation des systèmes</li>
+              </ul>
             </div>
             
-            <div className="border rounded-lg p-6 shadow-md">
-              <h3 className="text-xl font-bold mb-3">Diagnostic et réparation</h3>
-              <p className="text-gray-600 mb-4">
-                Intervention rapide en cas de panne ou de dysfonctionnement pour minimiser les perturbations de votre production.
+            <div className="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold mb-4 text-dark-green dark:text-green-400">Interventions d'urgence</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Une équipe disponible pour intervenir rapidement en cas de problème technique.
               </p>
-              <Button variant="outline">Service d'urgence</Button>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
+                <li>Réparation de fuites</li>
+                <li>Dépannage des systèmes de filtration</li>
+                <li>Résolution des problèmes de qualité d'eau</li>
+                <li>Remplacement d'équipements défectueux</li>
+              </ul>
             </div>
             
-            <div className="border rounded-lg p-6 shadow-md">
-              <h3 className="text-xl font-bold mb-3">Formation technique</h3>
-              <p className="text-gray-600 mb-4">
-                Formation de votre personnel à l'utilisation et à la maintenance de base des équipements piscicoles.
+            <div className="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold mb-4 text-dark-green dark:text-green-400">Formation pratique</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Nos techniciens forment votre équipe à l'utilisation et à la maintenance des installations.
               </p>
-              <Button variant="outline">Programmer une formation</Button>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
+                <li>Formation au contrôle des paramètres</li>
+                <li>Gestion quotidienne des installations</li>
+                <li>Détection précoce des problèmes</li>
+                <li>Meilleures pratiques d'entretien</li>
+              </ul>
+            </div>
+            
+            <div className="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold mb-4 text-dark-green dark:text-green-400">Audit technique</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Évaluation complète de vos installations pour identifier les améliorations possibles.
+              </p>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
+                <li>Analyse de la performance des systèmes</li>
+                <li>Identification des points faibles</li>
+                <li>Recommandations d'optimisation</li>
+                <li>Rapport détaillé avec plan d'action</li>
+              </ul>
+            </div>
+            
+            <div className="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold mb-4 text-dark-green dark:text-green-400">Conseil technique</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Conseils personnalisés pour améliorer vos installations et augmenter votre productivité.
+              </p>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
+                <li>Recommandations d'équipements</li>
+                <li>Solutions aux problèmes récurrents</li>
+                <li>Adaptation aux nouvelles techniques</li>
+                <li>Optimisation de la consommation d'énergie</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
-      
-      {/* Our Team */}
-      <section className="py-16 px-4 bg-blue-50">
+
+      {/* Notre équipe */}
+      <section className="py-16 px-4 bg-green-50 dark:bg-green-900/20">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Notre équipe de techniciens</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-dark-green dark:text-green-400">
+            Notre équipe technique
+          </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md text-center">
-              <div className="h-48 bg-blue-100 flex items-center justify-center">
-                <Users size={64} className="text-blue-500" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-green-200 dark:bg-green-800 rounded-full flex items-center justify-center mb-4">
+                <Users className="h-8 w-8 text-dark-green dark:text-green-400" />
               </div>
-              <div className="p-4">
-                <h3 className="font-bold text-xl mb-1">Michel Dupont</h3>
-                <p className="text-blue-700 mb-3">Spécialiste en systèmes aquaponiques</p>
-                <p className="text-gray-600 mb-4">15 ans d'expérience dans l'installation et la maintenance de systèmes aquaponiques innovants.</p>
-              </div>
+              <h3 className="text-xl font-semibold text-dark-green dark:text-green-400">15+</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center">Techniciens qualifiés</p>
             </div>
             
-            <div className="bg-white rounded-lg overflow-hidden shadow-md text-center">
-              <div className="h-48 bg-blue-100 flex items-center justify-center">
-                <Users size={64} className="text-blue-500" />
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-green-200 dark:bg-green-800 rounded-full flex items-center justify-center mb-4">
+                <Award className="h-8 w-8 text-dark-green dark:text-green-400" />
               </div>
-              <div className="p-4">
-                <h3 className="font-bold text-xl mb-1">Sophie Martin</h3>
-                <p className="text-blue-700 mb-3">Experte en équipements de filtration</p>
-                <p className="text-gray-600 mb-4">Spécialisée dans les systèmes de filtration avancés pour tous types d'élevages piscicoles.</p>
-              </div>
+              <h3 className="text-xl font-semibold text-dark-green dark:text-green-400">100%</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center">Certifiés et formés</p>
             </div>
             
-            <div className="bg-white rounded-lg overflow-hidden shadow-md text-center">
-              <div className="h-48 bg-blue-100 flex items-center justify-center">
-                <Users size={64} className="text-blue-500" />
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-green-200 dark:bg-green-800 rounded-full flex items-center justify-center mb-4">
+                <Calendar className="h-8 w-8 text-dark-green dark:text-green-400" />
               </div>
-              <div className="p-4">
-                <h3 className="font-bold text-xl mb-1">Jean Leroy</h3>
-                <p className="text-blue-700 mb-3">Technicien en automation</p>
-                <p className="text-gray-600 mb-4">Expert en systèmes automatisés de contrôle et de surveillance pour piscicultures.</p>
+              <h3 className="text-xl font-semibold text-dark-green dark:text-green-400">5+ ans</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center">D'expérience moyenne</p>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-green-200 dark:bg-green-800 rounded-full flex items-center justify-center mb-4">
+                <BookOpen className="h-8 w-8 text-dark-green dark:text-green-400" />
               </div>
+              <h3 className="text-xl font-semibold text-dark-green dark:text-green-400">Formation continue</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center">Mise à jour régulière des compétences</p>
             </div>
           </div>
           
-          <div className="mt-12 text-center">
-            <Button size="lg">Rejoindre notre équipe</Button>
+          <div className="text-center">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-dark-green text-dark-green hover:bg-dark-green hover:text-white dark:border-green-400 dark:text-green-400 dark:hover:bg-green-400 dark:hover:text-black"
+              onClick={() => setShowQuoteForm(true)}
+            >
+              Contacter nos techniciens
+            </Button>
           </div>
         </div>
       </section>

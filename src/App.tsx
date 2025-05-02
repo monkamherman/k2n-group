@@ -24,6 +24,7 @@ import Actualites from "./pages/minisites/Actualites";
 import Konsultan from "./pages/Konsultan";
 import Technologie from "./pages/Technologie";
 import Contact from "./pages/Contact";
+import Careers from "./pages/Careers/Careers";
 
 // Pages pour l'authentification
 import Login from "./pages/auth/Login";
@@ -56,10 +57,11 @@ const App = () => (
             <Route path="/elearning" element={<Elearning />} />
             <Route path="/actualites" element={<Actualites />} />
             
-            {/* Routes pour Konsultan et Technologie */}
+            {/* Routes pour Konsultan, Technologie et Carrières */}
             <Route path="/konsultan" element={<Konsultan />} />
             <Route path="/technologie" element={<Technologie />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/carrieres" element={<Careers />} />
             
             {/* Routes pour l'authentification */}
             <Route path="/connexion" element={<Login />} />
