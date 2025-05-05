@@ -1,11 +1,23 @@
 
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ServicesDropdown from "./services-menu/ServicesDropdown";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { ActiveService } from "./services-menu/types";
 
 function Navbar() {
   const isMobile = useIsMobile();
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeService, setActiveService] = useState<ActiveService>(null);
+  
+  const handleServiceHover = (service: ActiveService) => {
+    setActiveService(service);
+  };
+
+  const handleServiceLeave = () => {
+    setActiveService(null);
+  };
   
   // On mobile we'll show the dropdown elsewhere
   if (isMobile) {
@@ -46,7 +58,13 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
-          <ServicesDropdown />
+          <ServicesDropdown 
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            activeService={activeService}
+            handleServiceHover={handleServiceHover}
+            handleServiceLeave={handleServiceLeave}
+          />
         </li>
         <li>
           <NavLink

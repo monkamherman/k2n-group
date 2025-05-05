@@ -7,6 +7,9 @@ interface User {
   email: string;
   role: 'user' | 'admin' | 'blogger' | 'technician';
   avatar?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
 }
 
 interface LoginCredentials {
@@ -28,6 +31,9 @@ const users: User[] = [
     email: 'admin@k2n.com',
     role: 'admin',
     avatar: 'https://github.com/shadcn.png',
+    firstName: 'Admin',
+    lastName: 'User',
+    phone: '+237 655 123 456'
   },
   {
     id: '2',
@@ -35,6 +41,9 @@ const users: User[] = [
     email: 'blogger@k2n.com',
     role: 'blogger',
     avatar: 'https://i.pravatar.cc/150?u=blogger',
+    firstName: 'Blog',
+    lastName: 'Writer',
+    phone: '+237 655 789 012'
   },
   {
     id: '3',
@@ -42,6 +51,9 @@ const users: User[] = [
     email: 'tech@k2n.com',
     role: 'technician',
     avatar: 'https://i.pravatar.cc/150?u=technician',
+    firstName: 'Tech',
+    lastName: 'Expert',
+    phone: '+237 655 345 678'
   },
   {
     id: '4',
@@ -49,6 +61,9 @@ const users: User[] = [
     email: 'user@k2n.com',
     role: 'user',
     avatar: 'https://i.pravatar.cc/150?u=user',
+    firstName: 'Regular',
+    lastName: 'User',
+    phone: '+237 655 901 234'
   },
 ];
 
