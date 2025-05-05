@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,8 +5,19 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Users, PlusCircle, Edit, Trash2, CheckCircle, XCircle } from 'lucide-react';
+import { Users, PlusCircle, Edit, Trash2, CheckCircle, XCircle, BellRing } from 'lucide-react';
 import { authAPI, User } from '@/api/auth';
+
+// Notification interface to define the structure of notifications
+interface Notification {
+  id: string;
+  type: 'quote' | 'contact' | 'career';
+  title: string;
+  message: string;
+  sender: string;
+  timestamp: Date;
+  read: boolean;
+}
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -16,11 +26,13 @@ const AdminDashboard = () => {
   const [newStaffData, setNewStaffData] = useState({
     username: '',
     email: '',
-    role: 'technician',
+    role: 'technician' as 'technician' | 'admin' | 'blogger',
     firstName: '',
     lastName: '',
     phone: ''
   });
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
 
   // Fetch all staff members (non-users)
   useEffect(() => {
@@ -32,7 +44,7 @@ const AdminDashboard = () => {
             id: '1',
             username: 'admin',
             email: 'admin@k2n.com',
-            role: 'admin',
+            role: 'admin' as const,
             avatar: 'https://github.com/shadcn.png',
             firstName: 'Admin',
             lastName: 'User',
@@ -42,7 +54,7 @@ const AdminDashboard = () => {
             id: '2',
             username: 'blogger',
             email: 'blogger@k2n.com',
-            role: 'blogger',
+            role: 'blogger' as const,
             avatar: 'https://i.pravatar.cc/150?u=blogger',
             firstName: 'Blog',
             lastName: 'Writer',
@@ -52,7 +64,7 @@ const AdminDashboard = () => {
             id: '3',
             username: 'technician',
             email: 'tech@k2n.com',
-            role: 'technician',
+            role: 'technician' as const,
             avatar: 'https://i.pravatar.cc/150?u=technician',
             firstName: 'Tech',
             lastName: 'Expert',
@@ -71,9 +83,70 @@ const AdminDashboard = () => {
     fetchStaff();
   }, []);
 
+  // Fetch notifications
+  useEffect(() => {
+    // Mock notification data - in a real app, you would fetch from your API
+    const mockNotifications: Notification[] = [
+      {
+        id: '1',
+        type: 'quote',
+        title: 'Nouvelle demande de devis',
+        message: 'Paul Biya a soumis une demande de devis pour Techniciens spécialisés',
+        sender: 'paul.biya@example.com',
+        timestamp: new Date(2025, 4, 2, 10, 30),
+        read: false
+      },
+      {
+        id: '2',
+        type: 'career',
+        title: 'Candidature reçue',
+        message: 'Martin Fru a soumis sa candidature pour le poste de Technicien en pisciculture',
+        sender: 'martin.fru@example.com',
+        timestamp: new Date(2025, 4, 1, 14, 15),
+        read: false
+      },
+      {
+        id: '3',
+        type: 'contact',
+        title: 'Nouveau message de contact',
+        message: 'Jean Pierre a envoyé un message concernant les services de consultation',
+        sender: 'jean.pierre@example.com',
+        timestamp: new Date(2025, 3, 30, 9, 45),
+        read: true
+      },
+      {
+        id: '4',
+        type: 'quote',
+        title: 'Nouvelle demande de devis',
+        message: 'Anne Marie a soumis une demande de devis pour Production aquacole',
+        sender: 'anne.marie@example.com',
+        timestamp: new Date(2025, 3, 28, 16, 20),
+        read: true
+      },
+      {
+        id: '5',
+        type: 'career',
+        title: 'Candidature reçue',
+        message: 'Robert Ndongo a soumis sa candidature pour le poste de Responsable marketing digital',
+        sender: 'robert.ndongo@example.com',
+        timestamp: new Date(2025, 3, 25, 11, 10),
+        read: true
+      }
+    ];
+
+    setNotifications(mockNotifications);
+    
+    // Calculate unread notifications
+    const unread = mockNotifications.filter(notification => !notification.read).length;
+    setUnreadCount(unread);
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setNewStaffData(prev => ({ ...prev, [name]: value }));
+    setNewStaffData(prev => ({ 
+      ...prev, 
+      [name]: value 
+    }));
   };
 
   const handleAddStaff = () => {
@@ -101,6 +174,34 @@ const AdminDashboard = () => {
     setStaff(prev => prev.filter(staff => staff.id !== id));
   };
 
+  const markNotificationAsRead = (id: string) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === id 
+          ? { ...notification, read: true } 
+          : notification
+      )
+    );
+    setUnreadCount(prev => prev - 1);
+  };
+
+  const markAllNotificationsAsRead = () => {
+    setNotifications(prev => 
+      prev.map(notification => ({ ...notification, read: true }))
+    );
+    setUnreadCount(0);
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-3xl font-bold mb-6 dark:text-white">
@@ -112,6 +213,14 @@ const AdminDashboard = () => {
           <TabsTrigger value="overview">Aperçu</TabsTrigger>
           <TabsTrigger value="users">Utilisateurs</TabsTrigger>
           <TabsTrigger value="staff">Personnel</TabsTrigger>
+          <TabsTrigger value="notifications" className="relative">
+            Notifications
+            {unreadCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {unreadCount}
+              </span>
+            )}
+          </TabsTrigger>
           <TabsTrigger value="content">Contenu</TabsTrigger>
           <TabsTrigger value="settings">Paramètres</TabsTrigger>
         </TabsList>
@@ -342,7 +451,7 @@ const AdminDashboard = () => {
                           <Button 
                             variant="outline" 
                             size="icon" 
-                            className="w-8 h-8 text-red-600 hover:text-red-800"
+                            className="w-8 h-8 text-red-600 hover:text-red-900"
                             onClick={() => handleDeleteStaff(person.id)}
                           >
                             <Trash2 size={16} />
@@ -353,6 +462,92 @@ const AdminDashboard = () => {
                   ))}
                 </TableBody>
               </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="notifications">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle>Centre de notifications</CardTitle>
+                <CardDescription>Suivez les soumissions et interactions des utilisateurs</CardDescription>
+              </div>
+              <Button 
+                onClick={markAllNotificationsAsRead}
+                variant="outline"
+                className="flex items-center gap-2"
+                disabled={unreadCount === 0}
+              >
+                <CheckCircle size={16} />
+                Tout marquer comme lu
+              </Button>
+            </CardHeader>
+            <CardContent>
+              {notifications.length > 0 ? (
+                <div className="space-y-4">
+                  {notifications.map((notification) => (
+                    <div 
+                      key={notification.id} 
+                      className={`border p-4 rounded-md ${notification.read ? 'bg-white dark:bg-gray-950' : 'bg-green-50 dark:bg-green-900/20'}`}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-full ${
+                            notification.type === 'quote' 
+                              ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'
+                              : notification.type === 'contact'
+                                ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400'
+                                : 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400'
+                          }`}>
+                            <BellRing size={20} />
+                          </div>
+                          <div>
+                            <h4 className="font-medium text-dark-green dark:text-green-400">
+                              {notification.title}
+                              {!notification.read && (
+                                <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                  Nouveau
+                                </span>
+                              )}
+                            </h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              {notification.message}
+                            </p>
+                            <div className="flex items-center gap-2 mt-1 text-xs text-gray-500 dark:text-gray-500">
+                              <span>De: {notification.sender}</span>
+                              <span>•</span>
+                              <span>{formatDate(notification.timestamp)}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm">
+                            Détails
+                          </Button>
+                          {!notification.read && (
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => markNotificationAsRead(notification.id)}
+                            >
+                              Marquer comme lu
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <BellRing className="mx-auto h-12 w-12 text-gray-400" />
+                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">Aucune notification</h3>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    Vous recevrez des notifications lorsque les utilisateurs soumettront des formulaires.
+                  </p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
