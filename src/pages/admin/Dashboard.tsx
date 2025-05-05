@@ -5,8 +5,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Users, PlusCircle, Edit, Trash2, CheckCircle, XCircle, BellRing } from 'lucide-react';
+import { Users, PlusCircle, Edit, Trash2, CheckCircle, XCircle, BellRing, Eye } from 'lucide-react';
 import { authAPI, User } from '@/api/auth';
+import { Link } from 'react-router-dom';
 
 // Notification interface to define the structure of notifications
 interface Notification {
@@ -72,8 +73,8 @@ const AdminDashboard = () => {
           }
         ];
         
-        // Filter to only include non-user roles
-        const nonUserStaff = allUsers.filter(user => user.role !== 'user');
+        // Filter to only include non-user roles (fixed the type error)
+        const nonUserStaff = allUsers.filter(user => ['admin', 'blogger', 'technician'].includes(user.role));
         setStaff(nonUserStaff);
       } catch (error) {
         console.error('Error fetching staff:', error);
@@ -295,8 +296,9 @@ const AdminDashboard = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <button className="text-blue-600 hover:text-blue-900 mr-2">Modifier</button>
-                          <button className="text-red-600 hover:text-red-900">Supprimer</button>
+                          <Link to={`/admin/user-detail/${role}`} className="text-blue-600 hover:text-blue-900 mr-2">
+                            Voir détails
+                          </Link>
                         </td>
                       </tr>
                     ))}
@@ -445,9 +447,16 @@ const AdminDashboard = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="icon" className="w-8 h-8">
-                            <Edit size={16} />
-                          </Button>
+                          <Link to={`/admin/staff-detail/${person.id}`}>
+                            <Button variant="outline" size="icon" className="w-8 h-8">
+                              <Eye size={16} />
+                            </Button>
+                          </Link>
+                          <Link to={`/admin/staff-edit/${person.id}`}>
+                            <Button variant="outline" size="icon" className="w-8 h-8">
+                              <Edit size={16} />
+                            </Button>
+                          </Link>
                           <Button 
                             variant="outline" 
                             size="icon" 
@@ -522,9 +531,11 @@ const AdminDashboard = () => {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <Button variant="outline" size="sm">
-                            Détails
-                          </Button>
+                          <Link to={`/admin/notification-detail/${notification.id}`}>
+                            <Button variant="outline" size="sm">
+                              Détails
+                            </Button>
+                          </Link>
                           {!notification.read && (
                             <Button 
                               variant="outline" 

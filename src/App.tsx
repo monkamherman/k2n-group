@@ -32,6 +32,10 @@ import Register from "./pages/auth/Register";
 
 // Pages pour le dashboard admin
 import AdminDashboard from "./pages/admin/Dashboard";
+import StaffDetail from "./pages/admin/StaffDetail";
+import StaffEdit from "./pages/admin/StaffEdit";
+import NotificationDetail from "./pages/admin/NotificationDetail";
+import UserDetail from "./pages/admin/UserDetail";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +73,10 @@ const App = () => (
             
             {/* Routes pour le dashboard admin */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/staff-detail/:id" element={<StaffDetail />} />
+            <Route path="/admin/staff-edit/:id" element={<StaffEdit />} />
+            <Route path="/admin/notification-detail/:id" element={<NotificationDetail />} />
+            <Route path="/admin/user-detail/:username" element={<UserDetail />} />
           </Route>
           
           {/* Catch-all route */}
