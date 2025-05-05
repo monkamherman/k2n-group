@@ -1,18 +1,9 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAuthStore } from '@/store/authStore';
-import { Navigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
-  const { user } = useAuthStore();
   const [activeTab, setActiveTab] = useState('overview');
-
-  // Redirect if not admin
-  if (!user || user.role !== 'admin') {
-    return <Navigate to="/" replace />;
-  }
 
   return (
     <div className="container mx-auto py-10">
